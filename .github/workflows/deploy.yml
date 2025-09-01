@@ -22,7 +22,7 @@ jobs:
 
       - name: Deploy code to EC2
         run: |
-          ssh -i ~/.ssh/ec2_key ec2-user@${{ vars.EC2_HOST }} "
-            cd /home/ec2-user/learn-github-actions &&
+          ssh -i ~/.ssh/ec2_key ubuntu@${{ vars.EC2_HOST }} "
+            cd /home/ubuntu/learn-github-actions &&
             git pull
           "
