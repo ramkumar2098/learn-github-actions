@@ -22,8 +22,20 @@ jobs:
           script: |
             cd /home/ubuntu/learn-github-actions
             git pull
+
+            # Create .env file
             echo "DB_URL=${{ secrets.DB_URL }}" > .env
             echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
             echo "MY_SECRET=789" >> .env
+
+            # Build new image
             docker build -t app .
-            docker run -d -p 3000:3000 --env-file .env app
+
+            # Stop and remove old container (if running)
+            docker rm -f app || true
+
+            # Run new container
+            docker run -d --name app -p 3000:3000 --env-file .env app
+
+            # Cleanup unused images & containers
+            docker system prune -af
