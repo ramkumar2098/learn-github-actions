@@ -13,16 +13,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/ec2_key
-          chmod 600 ~/.ssh/ec2_key
-          echo "${{ vars.EC2_KNOWN_HOST }}" > ~/.ssh/known_hosts
-
       - name: Deploy code to EC2
-        run: |
-          ssh -i ~/.ssh/ec2_key ubuntu@${{ vars.EC2_HOST }} "
-            cd /home/ubuntu/learn-github-actions &&
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /home/ubuntu/learn-github-actions
             git pull
-          "
