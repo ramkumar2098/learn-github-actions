@@ -26,4 +26,4 @@ jobs:
             echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
             echo "MY_SECRET=789" >> .env
             docker build -t app .
-            docker run --rm -p 3000:3000 --env-file .env app
+            docker run -d -p 3000:3000 --env-file .env app
