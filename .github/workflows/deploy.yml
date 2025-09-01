@@ -25,4 +25,5 @@ jobs:
             DB_URL=${{ secrets.DB_URL }} \
             JWT_SECRET=${{ secrets.JWT_SECRET }} \
             MY_SECRET=789 \
+            npm ci
             node main.js

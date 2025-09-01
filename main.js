@@ -1,7 +1,12 @@
-console.log('hello world from learn github actions')
+const express = require('express')
 
-console.log('DB_URL', process.env.DB_URL)
-console.log('JWT_SECRET', process.env.JWT_SECRET)
-console.log('MY_SECRET', process.env.MY_SECRET)
+const app = express()
 
-console.log('print secret', +process.env.DB_URL + +process.env.JWT_SECRET)
+app.get('/', (req, res) => {
+  console.log('you have hit /')
+  res.send('hello there')
+})
+
+app.listen(3000, () => {
+  console.log('listening on port 3000')
+})
