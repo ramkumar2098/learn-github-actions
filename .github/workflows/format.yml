@@ -21,4 +21,4 @@ jobs:
         run: npm ci --omit=prod
 
       - name: Run Prettier check
-        run: npx prettier --check --ignore-unknown
+        run: npx prettier --check --ignore-unknown .
