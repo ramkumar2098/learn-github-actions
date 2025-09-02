@@ -12,13 +12,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      - name: Install devDependencies
-        run: npm ci --omit=optional --omit=peer
-
       - name: Run Prettier check
-        run: npx prettier --check --ignore-unknown .
+        uses: actionsx/prettier@v3
+        with:
+          args: --check --ignore-unknown
