@@ -18,7 +18,7 @@ jobs:
           node-version: 20
 
       - name: Install devDependencies
-        run: npm ci --omit=prod
+        run: npm ci --omit=optional --omit=peer
 
       - name: Run Prettier check
         run: npx prettier --check --ignore-unknown .
