@@ -15,4 +15,4 @@ jobs:
       - name: Run Prettier check
         uses: actionsx/prettier@v3
         with:
-          args: --check --ignore-unknown
+          args: --check --ignore-unknown .
