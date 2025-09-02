@@ -26,7 +26,6 @@ jobs:
             # Create .env file
             echo "DB_URL=${{ secrets.DB_URL }}" > .env
             echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
-            echo "MY_SECRET=789" >> .env
 
             # Build new image
             docker build -t app .
