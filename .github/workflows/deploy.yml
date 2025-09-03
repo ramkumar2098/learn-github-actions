@@ -27,14 +27,8 @@ jobs:
             echo "DB_URL=${{ secrets.DB_URL }}" > .env
             echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
 
-            # Build new image
-            docker build -t app .
-
-            # Stop and remove old container (if running)
-            docker rm -f app || true
-
-            # Run new container
-            docker run -d --name app -p 3000:3000 --env-file .env app
+            # Build and run with Docker Compose
+            docker compose up -d --build
 
             # Remove dangling images
             docker image prune -f
