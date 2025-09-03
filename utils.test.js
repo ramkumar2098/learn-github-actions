@@ -2,7 +2,7 @@ const { add } = require('./utils')
 
 describe('add function', () => {
   test('adds two positive numbers', () => {
-    expect(add(2, 4)).toBe(5)
+    expect(add(2, 3)).toBe(5)
   })
 
   test('adds a positive and a negative number', () => {
