@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 
 app.get('/', (req, res) => {
-  console.log('you have hit /')
+  console.log('hey, you have hit /')
   res.send('hello there' + process.env.DB_URL + process.env.JWT_SECRET)
 })
 
