@@ -5,3 +5,7 @@ npm-debug.log
 Dockerfile
 .github
 .env
+**/*.test.js
+.prettierrc
+.dockerignore
+docker-compose.yml
