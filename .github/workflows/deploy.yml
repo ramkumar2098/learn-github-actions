@@ -13,16 +13,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Copy project files to EC2
-        uses: appleboy/scp-action@v1.0.0
+      - name: Deploy to EC2 via rsync
+        uses: burnett01/rsync-deployments@v7.0.0
         with:
-          host: ${{ vars.EC2_HOST }}
-          username: ubuntu
-          key: ${{ secrets.EC2_SSH_KEY }}
-          source: '.'
-          target: '/home/ubuntu/learn-github-actions'
+          switches: -avz --delete --exclude-from='.dockerignore'
+          path: ./
+          remote_path: /home/ubuntu/learn-github-actions
+          remote_host: ${{ vars.EC2_HOST }}
+          remote_user: ubuntu
+          remote_key: ${{ secrets.EC2_SSH_KEY }}
 
-      - name: Deploy code on EC2
+      - name: Run deploy commands on EC2
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ vars.EC2_HOST }}
