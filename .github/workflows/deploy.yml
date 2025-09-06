@@ -16,13 +16,7 @@ jobs:
       - name: Deploy to EC2 via rsync
         uses: burnett01/rsync-deployments@7.1.0
         with:
-          switches: -avz --delete
-          exclude: |
-            .git
-            .github
-            .gitignore
-            .prettierrc
-            **/*.test.js
+          switches: -avz --delete --exclude=.git --exclude=.github --exclude=.gitignore --exclude=.prettierrc --exclude=**/*.test.js
           path: ./
           remote_path: /home/ubuntu/learn-github-actions
           remote_host: ${{ vars.EC2_HOST }}
