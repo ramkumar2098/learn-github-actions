@@ -13,7 +13,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy code to EC2
+      - name: Copy project files to EC2
+        uses: appleboy/scp-action@v1.0.0
+        with:
+          host: ${{ vars.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: '.'
+          target: '/home/ubuntu/learn-github-actions'
+
+      - name: Deploy code on EC2
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ vars.EC2_HOST }}
@@ -21,9 +30,8 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd /home/ubuntu/learn-github-actions
-            git pull
 
-            # Create .env file
+            # Recreate .env file
             echo "DB_URL=${{ secrets.DB_URL }}" > .env
             echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
 
